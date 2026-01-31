@@ -129,18 +129,7 @@ public class HomePageBannerHelper {
     }
 
     private boolean isWhileXposed() {
-        if (checkRootPermission() != 0) return true; // 没 root 就别走校验了
-        try {
-            List<DeviceHelper.Module.ModuleInfo> module = scanModules("/data/adb/modules", Charsets.UTF_8);
-            String moduleName = module.getFirst().extractName();
-            if (moduleName.contains("nolog") || moduleName.contains("日志")) {
-                return false;
-            }
-            return moduleName.contains("LSPosed IT") || moduleName.equals("LSPosed - Irena");
-        } catch (Throwable e) {
-            AndroidLog.e("isWhileXposed", e);
-            return true;
-        }
+        return true; //别检测了
     }
 
     public static boolean getIsUnofficialRom(Context context) {
