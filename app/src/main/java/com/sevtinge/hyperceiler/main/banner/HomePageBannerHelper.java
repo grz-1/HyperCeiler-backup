@@ -133,38 +133,7 @@ public class HomePageBannerHelper {
     }
 
     public static boolean getIsUnofficialRom(Context context) {
-        String baseOs = getBaseOs();
-        String romAuthor = getRomAuthor();
-        String systemVersion = getSystemVersionIncremental();
-        String host = getHost();
-
-        boolean isNotCustomBaseOs = !baseOs.startsWith("V") &&
-            !baseOs.startsWith("Xiaomi") &&
-            !baseOs.startsWith("Redmi") &&
-            !baseOs.startsWith("POCO") &&
-            !"null".equals(baseOs);
-
-        boolean hasRomAuthor = !romAuthor.isEmpty();
-
-        boolean isSystemVersionContains = systemVersion.contains("江南") || systemVersion.contains("月色");
-
-        boolean isNotCustomHost = !host.startsWith("pangu-build-component-system") &&
-            !host.startsWith("builder-system") &&
-            !host.startsWith("non-pangu-pod") &&
-            !host.equals("xiaomi.com");
-
-        boolean hasAdvSettings = isAppInstalled(context, "com.baiyang.settings");
-
-        boolean hasBaiyangLicense = !Objects.equals(getProp("ro.system.baiyang.license", ""), "");
-
-        boolean hasCharacteristics = Objects.equals(getProp("ro.kernel.android.checkjni", ""), "0") &&
-            Objects.equals(getProp("ro.kernel.checkjni", ""), "0") &&
-            Objects.equals(getProp("vendor.bluetooth.startbtlogger", ""), "false") &&
-            Objects.equals(getProp("persist.sys.offlinelog.kernel", ""), "false") &&
-            (Objects.equals(getProp("persist.sys.offlinelog.bootlog", ""), "false") || Objects.equals(getProp("persist.sys.offlinelog.bootlog", ""), "=false")) &&
-            Objects.equals(getProp("sys.miui.ndcd", ""), "off");
-
-        return hasRomAuthor || isSystemVersionContains || Objects.equals(host, "xiaomi.eu") || (isNotCustomBaseOs && isNotCustomHost) || hasAdvSettings || hasBaiyangLicense || hasCharacteristics;
+         return true;
     }
 
     private static boolean isAppInstalled(Context context, String packageName) {
