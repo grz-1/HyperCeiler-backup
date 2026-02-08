@@ -38,7 +38,6 @@ import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.DisableFr
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.FreeFormCount;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.FreeformBubble;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.OpenAppInFreeForm;
-import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.RemoveSmallWindowRestrictions;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.StickyFloatingWindows;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.freeform.UnForegroundPin;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.mipad.IgnoreStylusKeyGesture;
@@ -51,6 +50,7 @@ import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.AllowDisabl
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.AllowManageAllNotifications;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.AllowUntrustedTouchForU;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.AppLinkVerify;
+import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.AutoEffectSwitchForSystem;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.BypassForceDownloadui;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.BypassForceMiAppStore;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.BypassUnknownSourcesRestrictions;
@@ -65,6 +65,7 @@ import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.DisableMiui
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.DisablePinVerifyPer72h;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.DisableThermal;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.DisableVerifyCanBeDisabled;
+import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.EffectBinderProxy;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.HookEntry;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.LinkTurboToast;
 import com.sevtinge.hyperceiler.libhook.rules.systemframework.others.NoAccessDeviceLogsRequest;
@@ -106,7 +107,6 @@ public class SystemFrameworkV extends BaseLoad {
         initHook(new FreeFormCount(), mPrefsMap.getBoolean("system_framework_freeform_count"));
         initHook(new FreeformBubble(), mPrefsMap.getBoolean("system_framework_freeform_bubble"));
         initHook(new DisableFreeformBlackList(), mPrefsMap.getBoolean("system_framework_disable_freeform_blacklist"));
-        initHook(RemoveSmallWindowRestrictions.INSTANCE, mPrefsMap.getBoolean("system_framework_disable_freeform_blacklist"));
         initHook(new StickyFloatingWindows(), mPrefsMap.getBoolean("system_framework_freeform_sticky"));
         initHook(new OpenAppInFreeForm(), mPrefsMap.getBoolean("system_framework_freeform_jump"));
         initHook(new UnForegroundPin(), mPrefsMap.getBoolean("system_framework_freeform_foreground_pin"));
@@ -161,10 +161,10 @@ public class SystemFrameworkV extends BaseLoad {
         initHook(new QuickScreenshot(), mPrefsMap.getBoolean("system_framework_quick_screenshot"));
         initHook(new LinkTurboToast(), mPrefsMap.getBoolean("system_framework_disable_link_turbo_toast"));
 
-        /*if (mPrefsMap.getBoolean("misound_bluetooth")) {
+        if (mPrefsMap.getBoolean("misound_bluetooth")) {
             initHook(new EffectBinderProxy());
             initHook(new AutoEffectSwitchForSystem());
-        }*/
+        }
 
         if (isPad()) {
             // 小米/红米平板设置相关

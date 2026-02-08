@@ -25,7 +25,6 @@ import com.sevtinge.hyperceiler.libhook.utils.hookapi.tool.getIntField
 import com.sevtinge.hyperceiler.libhook.utils.hookapi.tool.getObjectField
 import com.sevtinge.hyperceiler.libhook.utils.log.XposedLog
 import io.github.kyuubiran.ezxhelper.core.finder.MethodFinder.`-Static`.methodFinder
-import io.github.kyuubiran.ezxhelper.core.util.ClassUtil.loadClass
 import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createAfterHook
 import io.github.kyuubiran.ezxhelper.xposed.dsl.HookFactory.`-Static`.createBeforeHook
 
@@ -34,7 +33,7 @@ object NoAccessDeviceLogsRequest : BaseHook() {
     private lateinit var mLogcatManagerService: Any
     override fun init() {
 
-        loadClass("com.android.server.logcat.LogcatManagerService", lpparam.classLoader).methodFinder().apply {
+        findClass("com.android.server.logcat.LogcatManagerService", systemParam.classLoader).methodFinder().apply {
             filterByName("onStart")
             .first()
             .createAfterHook {
@@ -43,7 +42,7 @@ object NoAccessDeviceLogsRequest : BaseHook() {
                     mActivityManagerInternal =
                         mLogcatManagerService.getObjectField("mActivityManagerInternal")!!
                 } catch (t: Throwable) {
-                    XposedLog.e(TAG, lpparam.packageName, "NoAccessDeviceLogsRequest -> onStart", t)
+                    XposedLog.e(TAG, packageName, "NoAccessDeviceLogsRequest -> onStart", t)
                 }
             }
 
@@ -62,21 +61,21 @@ object NoAccessDeviceLogsRequest : BaseHook() {
                     if (isDebug()) {
                         XposedLog.d(
                             TAG,
-                            this@NoAccessDeviceLogsRequest.lpparam.packageName,
+                            this@NoAccessDeviceLogsRequest.packageName,
                             "NoAccessDeviceLogsRequest bypass for package=$packageName uid=$uid"
                         )
                     }
                     it.result = null
                 } catch (t: Throwable) {
                     // 输出异常日志
-                    XposedLog.e(TAG, this@NoAccessDeviceLogsRequest.lpparam.packageName, "processNewLogAccessRequest failed", t)
+                    XposedLog.e(TAG, this@NoAccessDeviceLogsRequest.packageName, "processNewLogAccessRequest failed", t)
                 }
             }
         }
 
         // 米客原来的取消方法，未知情况封堵失败
         /*try {
-            loadClass("com.android.server.logcat.LogcatManagerService").methodFinder().filter {
+            findClass("com.android.server.logcat.LogcatManagerService").methodFinder().filter {
                 name == "onLogAccessRequested"
             }.toList().createHooks {
                 before { param ->
@@ -85,7 +84,7 @@ object NoAccessDeviceLogsRequest : BaseHook() {
                 }
             }
         } catch (t: Throwable) {
-            logE(TAG, this.lpparam.packageName, t)
+            logE(TAG, packageName, t)
         }*/
     }
 }

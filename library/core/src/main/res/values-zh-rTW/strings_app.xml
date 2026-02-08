@@ -16,8 +16,7 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
   ~ Copyright (C) 2023-2026 HyperCeiler Contributions
-  -->
-<resources>
+  --><resources>
     <string name="version_update">發現新版本</string>
     <!--Introduction to Xposed Modules-->
     <string name="new_permission_wifi_state_desc">在裝置的內部儲存空間新增和刪除檔案</string>
@@ -77,9 +76,9 @@
     <string name="kill_4">軟體名 kill</string>
     <string name="edit_out">獲取結果</string>
     <string name="edit_key">輸入 Key 值</string>
-    <string name="prefs_1">不存在此 Key: </string>
-    <string name="prefs_2">成功移除 Key: </string>
-    <string name="prefs_3">移除 Key 失敗,可能不存在: </string>
+    <string name="prefs_1">不存在此 Key:</string>
+    <string name="prefs_2">成功移除 Key:</string>
+    <string name="prefs_3">移除 Key 失敗,可能不存在:</string>
     <string name="prefs_4">請檢查待獲取 Key 的返回值類型</string>
     <string name="prefs_5">選擇類型</string>
     <string name="prefs_6">檢查共享首選項</string>
@@ -1427,7 +1426,14 @@
     <string name="market_disable_start_push_dialog">禁用啟動推送對話框</string>
     <!--Mi sound-->
     <string name="misound">音質音效</string>
-    <string name="misound_bluetooth">耳機狀態自動切換原聲</string>
+    <string name="misound_bluetooth_category">音效</string>
+    <string name="misound_bluetooth">耳機狀態自動切換</string>
+    <string name="misound_bluetooth_desc">需要勾選系統框架、系統介面、音質音效作用域，重啟以套用更改</string>
+    <string name="misound_bluetooth_lock_selection">鎖定音效選擇</string>
+    <string name="misound_bluetooth_lock_selection_desc">耳機連線時禁止切換音效</string>
+    <string name="misound_bluetooth_remember_device">記憶裝置音效</string>
+    <string name="misound_bluetooth_remember_device_desc">為每個裝置記憶獨立的音效設定</string>
+    <string name="misound_bluetooth_default_effect">預設音效</string>
     <string name="misound_increase_sampling_rate">提高音頻採樣率</string>
     <!--Mi Settings-->
     <string name="mi_settings">小米設定</string>
