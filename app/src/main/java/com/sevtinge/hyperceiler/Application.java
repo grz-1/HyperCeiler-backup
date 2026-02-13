@@ -52,8 +52,9 @@ public class Application extends android.app.Application implements XposedServic
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        PrefsUtils.mSharedPreferences = PrefsUtils.getSharedPrefs(base);
+        PrefsUtils.mSharedPreferences = PrefsUtils.getSharedPrefs(base, true);
         XposedServiceHelper.registerListener(this);
+
     }
 
     @Override
@@ -66,10 +67,13 @@ public class Application extends android.app.Application implements XposedServic
         LogManager.init(this);
         LogViewerActivity.setXposedLogLoader((context, callback) -> XposedLogLoader.loadLogs(callback));
 
+        // 应用内 Crash 服务
+        setupCrashHandler();
+
+        // 加载图标缓存
         new Thread(() -> AppInfoCache.getInstance(this).initAllAppInfos()).start();
 
         LSPosedScopeHelper.init();
-        setupCrashHandler();
     }
 
     private void setupCrashHandler() {
@@ -104,6 +108,8 @@ public class Application extends android.app.Application implements XposedServic
             ScopeManager.setService(service);
             PrefsUtils.remotePrefs =
                 (RemotePreferences) service.getRemotePreferences(PrefsUtils.mPrefsName + "_remote");
+
+            PrefsUtils.syncAllToRemotePrefs();
             reloadListener.run();
         }
     }
